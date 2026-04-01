@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp()); //não tirar
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key}); //não tirar
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: ContadorTela()); 
+  }
+}
+
+class ContadorTela extends StatefulWidget {
+  const ContadorTela({super.key}); 
+
+  @override
+   _ContadorTelaState createState() => _ContadorTelaState();
+}
+
+class _ContadorTelaState extends State<ContadorTela> {
+  int contador = 0;
+
+  void incrementar() {
+    setState(() {
+      contador++;
+    });
+}
+     
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(title: Text("Exemplo setState")),
+        body: Center(
+          child: Text("Contador: $contador", style: TextStyle(fontSize: 30)),
+
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: incrementar,
+          child: Icon(Icons.add),
+        ),
+      );
+    }
+    }

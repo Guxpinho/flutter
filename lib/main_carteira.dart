@@ -32,12 +32,13 @@ class CarteiraDigital extends StatelessWidget {
         children: const [
 
           CartaoBanco(
-            corCartao: Color.fromARGB(255, 0, 0, 0),
+            corCartao: Colors.black,
             banco: "Banco SESI / SENAI",
             numeroCartao: "1234 5678 9012 3456",
             titular: "Gustavo",
             validade: "12/30",
-            bandeira: "assets/images/visa.png", 
+            bandeira: "assets/images/visa.png",
+            logo: "assets/images/sesi-logo.png",
           ),
 
           SizedBox(height: 20),
@@ -49,6 +50,7 @@ class CarteiraDigital extends StatelessWidget {
             titular: "Sabrina",
             validade: "11/27",
             bandeira: "assets/images/mastercard.png",
+            logo: "assets/images/senai.png",
           ),
 
           SizedBox(height: 20),
@@ -59,7 +61,8 @@ class CarteiraDigital extends StatelessWidget {
             numeroCartao: "4444 3333 2222 1111",
             titular: "Musguinho",
             validade: "09/20",
-            bandeira: "assets/images/Elo_logo.png", 
+            bandeira: "assets/images/Elo_logo.png",
+            logo: "assets/images/cpfl_novo.png",
           ),
         ],
       ),
@@ -74,6 +77,7 @@ class CartaoBanco extends StatelessWidget {
   final String titular;
   final String validade;
   final String bandeira;
+  final String logo;
 
   const CartaoBanco({
     super.key,
@@ -83,6 +87,7 @@ class CartaoBanco extends StatelessWidget {
     required this.titular,
     required this.validade,
     required this.bandeira,
+    required this.logo,
   });
 
   @override
@@ -99,11 +104,12 @@ class CartaoBanco extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
+          // 🔝 Topo
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                bandeira, // ✅ agora usa a variável corretamente
+                bandeira,
                 height: 40,
                 width: 40,
               ),
@@ -115,25 +121,40 @@ class CartaoBanco extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Image.asset(
+                logo,
+                height: 50,
+                width: 50,
+              ),
               const Icon(Icons.contactless, size: 25, color: Colors.white),
             ],
+            
           ),
 
+          // 💳 Chip
           const Icon(
             Icons.sim_card,
             color: Color.fromARGB(255, 255, 140, 0),
             size: 30,
           ),
 
-          Text(
-            numeroCartao,
-            style: const TextStyle(
-              fontSize: 22,
-              color: Colors.white,
-              letterSpacing: 2,
-            ),
+         
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              
+              Text(
+                numeroCartao,
+                style: const TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  letterSpacing: 2,
+                ),
+              ),
+            ],
           ),
 
+          // 🔻 Rodapé
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -154,7 +175,6 @@ class CartaoBanco extends StatelessWidget {
                   ),
                 ],
               ),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

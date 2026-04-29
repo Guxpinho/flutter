@@ -64,6 +64,29 @@ class CarteiraDigital extends StatelessWidget {
             bandeira: "assets/images/Elo_logo.png",
             logo: "assets/images/cpfl_novo.png",
           ),
+          SizedBox(height: 20),
+
+          CartaoBanco(
+            corCartao: Color.fromARGB(255, 145, 0, 80),
+            banco: "Banco de vinho",
+            numeroCartao: "4444 3333 2222 1111",
+            titular: "vinhedo",
+            validade: "09/20",
+            bandeira: "assets/images/noah.jpg",
+            logo: "assets/images/senai.png",
+          ),
+
+          SizedBox(height: 20),
+
+          CartaoBanco(
+            corCartao: Color.fromARGB(255, 255, 166, 0),
+            banco: "Banco da praia",
+            numeroCartao: "4444 3333 2222 1111",
+            titular: "praiano",
+            validade: "09/20",
+            bandeira: "assets/images/Elo_logo.png",
+            logo: "assets/images/surfista.jpg",
+          ),
         ],
       ),
     );

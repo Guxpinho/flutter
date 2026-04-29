@@ -1,180 +1,79 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp()); //não tirar
+  runApp(const LoginApp()); 
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key}); //não tirar
+class LoginApp extends StatelessWidget {
+  const LoginApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double largura = MediaQuery.of(context).size.width;
+    double altura = MediaQuery.of(context).size.height;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Carteira Digital",
-      home: const CarteiraDigital(),
-    );
-  }
-}
+      title: "Login Responsivo",
+      home: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(height: altura * 0.1),
+                  
+                  Icon(
+                    Icons.lock, 
+                    color: Colors.blue, 
+                    size: largura * 0.2, 
+                  ),
+                  
+                  const Text(
+                    "Login",
+                    style: TextStyle(
+                      fontSize: 24, 
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  
+                  Container(
+                    width: largura * 0.8, 
+                    child: Column( // Removido o 'const' daqui pois os filhos não são constantes
+                      children: [
+                        const TextField(
+                          decoration: InputDecoration(labelText: "Email"),
+                        ),
+                        const TextField(
+                          decoration: InputDecoration(labelText: "Senha"),
+                          obscureText: true,
+                        ),
+                        const SizedBox(height: 30),
+                        
+                        
+                        ElevatedButton( //
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(largura * 0.8, 50),
+                          ),
+                          child: const Text("Entrar"),
+                        ),
 
-class CarteiraDigital extends StatelessWidget {
-  const CarteiraDigital({super.key});
+                        const SizedBox(height: 10),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Carteira Digital"),
-        centerTitle: true,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: const [
-
-          CartaoBanco(
-            corCartao: Color.fromARGB(255, 0, 0, 0),
-            banco: "Banco SESI / SENAI",
-            numeroCartao: "1234 5678 9012 3456",
-            titular: "Gustavo",
-            validade: "12/30",
-            bandeira: "assets/images/visa.png", 
-          ),
-
-          SizedBox(height: 20),
-
-          CartaoBanco(
-            corCartao: Color.fromARGB(255, 183, 58, 58),
-            banco: "Banco Vampiro",
-            numeroCartao: "1111 2222 3333 4444",
-            titular: "Sabrina",
-            validade: "11/27",
-            bandeira: "assets/images/mastercard.png",
-          ),
-
-          SizedBox(height: 20),
-
-          CartaoBanco(
-            corCartao: Color.fromARGB(255, 0, 163, 0),
-            banco: "Banco do Musgo",
-            numeroCartao: "4444 3333 2222 1111",
-            titular: "Musguinho",
-            validade: "09/20",
-            bandeira: "assets/images/Elo_logo.png", 
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CartaoBanco extends StatelessWidget {
-  final Color corCartao;
-  final String banco;
-  final String numeroCartao;
-  final String titular;
-  final String validade;
-  final String bandeira;
-
-  const CartaoBanco({
-    super.key,
-    required this.corCartao,
-    required this.banco,
-    required this.numeroCartao,
-    required this.titular,
-    required this.validade,
-    required this.bandeira,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: corCartao,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                bandeira, // ✅ agora usa a variável corretamente
-                height: 40,
-                width: 40,
+                        // BOTÃO CRIAR CONTA
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text("Criar conta"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                banco,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Icon(Icons.contactless, size: 25, color: Colors.white),
-            ],
-          ),
-
-          const Icon(
-            Icons.sim_card,
-            color: Color.fromARGB(255, 255, 140, 0),
-            size: 30,
-          ),
-
-          Text(
-            numeroCartao,
-            style: const TextStyle(
-              fontSize: 22,
-              color: Colors.white,
-              letterSpacing: 2,
             ),
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Titular",
-                    style: TextStyle(fontSize: 12, color: Colors.white),
-                  ),
-                  Text(
-                    titular,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Validade",
-                    style: TextStyle(fontSize: 12, color: Colors.white),
-                  ),
-                  Text(
-                    validade,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

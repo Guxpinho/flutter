@@ -29,7 +29,8 @@ class _ContadorTelaState extends State<ContadorTela> {
     });
 }
      
-    Widget build(BuildContext context) {
+    @override
+  Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(title: Text("Exemplo setState")),
         body: Center(

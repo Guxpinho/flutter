@@ -60,22 +60,11 @@ class LoginApp extends StatelessWidget {
 
                         const SizedBox(height: 10),
 
-                         
+                        
                         TextButton(
                           onPressed: () {},
                           child: const Text("Criar conta"),
                         ),
-                        
-                        SizedBox(height: altura * 1.0),
-
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "botão teste",
-                            style: TextStyle(fontSize: 18, color: Colors.red),
-                          ),
-                        )
-
                       ],
                     ),
                   ),

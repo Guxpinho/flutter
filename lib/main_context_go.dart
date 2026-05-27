@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 
 class TelaLogin extends StatelessWidget {
   const TelaLogin({super.key});
@@ -27,17 +27,13 @@ class TelaLogin extends StatelessWidget {
                   ),
               ),
               ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('inicio'),
-                onTap: () {
-                  print('Clicou em: Inicio');
-                  Navigator.pop(context); // Fechar o drawer
-                },
+                title: const Text('Home'),
+                onTap: () => context.go('/home'),
               ),
             ]
           ),
         ),
-      ),
+        ),
     );
   }
 }

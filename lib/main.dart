@@ -1,104 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const AppNavegacao());
-}
+void main() => runApp(const MaterialApp(home: TelaPrincipal()));
 
-class AppNavegacao extends StatelessWidget {
-  const AppNavegacao({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: TelaPrincipal(),
-    );
-  }
-}
-
-// Tela Principal (Stateful para poder atualizar a tela quando a outra retornar um dado)
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
-
   @override
   State<TelaPrincipal> createState() => _TelaPrincipalState();
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  String retorno = "Nenhum dado retornado ainda.";
+  String textoNaTela = "Memória Vazia";
 
+  // 1. FUNÇÃO PARA SALVAR (Igualzinho ao seu slide)
+  void salvar() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cidade', 'São Paulo');
+  }
+
+  // 2. FUNÇÃO PARA LER (Igualzinho ao seu slide)
+  void ler() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(( ) {
+      textoNaTela = prefs.getString('cidade') ?? "Não encontrado";
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tela Principal')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(retorno, style: const TextStyle(fontSize: 18)),
+            Text(textoNaTela, style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                // async {
-                final resultado = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TelaSecundaria(
-                      mensagem: 'Dado enviado da Tela Principal'
-                    )
-                  )
-                );
-
-                if (resultado != null) {
-                  setState(() {
-                    retorno = resultado;
-                  });
-                }
-              },
-              child: const Text('Ir para a próxima tela'),
-            ),
+            ElevatedButton(onPressed: salvar, child: const Text("1. Salvar 'Leonardo'")),
+            ElevatedButton(onPressed: ler, child: const Text("2. Ler da Memória")),
           ],
         ),
       ),
     );
   }
 }
-
-// Tela Secundária
-class TelaSecundaria extends StatefulWidget {
-  final String mensagem;
-
-  // Construtor exigindo que a tela anterior passe a "mensagem"
-  const TelaSecundaria({super.key, required this.mensagem});
-
-  @override
-  State<TelaSecundaria> createState() => _TelaSecundariaState();
-}
-
-class _TelaSecundariaState extends State<TelaSecundaria> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tela Secundária'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Recebido: ${widget.mensagem}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context, 'Resposta da Tela Secundária');
-              },
-              child: const Text('Voltar com resposta'
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-} 
